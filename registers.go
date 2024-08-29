@@ -48,3 +48,7 @@ func (r GPRegister) Validate() error {
 func (r GPRegister) Binary() uint32 {
 	return uint32(r)
 }
+
+func (r GPRegister) String() string {
+	return fmt.Sprintf("X%d", r)
+}

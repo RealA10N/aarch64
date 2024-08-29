@@ -15,6 +15,10 @@ func (m MovShift) Binary() uint32 {
 	return uint32(m)
 }
 
+func (m MovShift) String() string {
+	return fmt.Sprintf("LSL #%d", m*16)
+}
+
 type movz uint32
 
 func MOVZ(dest GPRegister, imm Immediate16, shift MovShift) (movz, error) {
