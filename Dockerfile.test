@@ -5,6 +5,8 @@
 
 FROM golang:1.23
 
+WORKDIR /aarch64codegen
+
 COPY . .
 
 RUN apt update -y --no-install-recommends
