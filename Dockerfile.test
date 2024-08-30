@@ -9,8 +9,8 @@ WORKDIR /aarch64codegen
 
 COPY . .
 
-RUN apt update && \
-    apt install gcc-aarch64-linux-gnu
+RUN apt update -y --no-install-recommends
+RUN apt install -y gcc-aarch64-linux-gnu
 
 RUN go mod download
 
