@@ -3,7 +3,7 @@
 // general purpose register in AArch64. The "MOV" instruction itself is an alias
 // to MOVZ with a shift of 0, and (when possible) a MOVN instruction with a high
 // immediate value that can be encoded using 16 bits and shifts.
-package aarch64
+package aarch64codegen
 
 import "fmt"
 

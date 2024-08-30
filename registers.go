@@ -1,4 +1,4 @@
-package aarch64
+package aarch64codegen
 
 import "fmt"
 
