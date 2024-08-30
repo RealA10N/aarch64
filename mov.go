@@ -9,6 +9,13 @@ import "fmt"
 
 type MovShift uint8
 
+const (
+	MovShift0 MovShift = iota
+	MovShift16
+	MovShift32
+	MovShift48
+)
+
 func (m MovShift) Validate() error {
 	if m > 3 {
 		return fmt.Errorf("invalid shift value %d", m)
@@ -48,8 +55,8 @@ func movExtractDetails(m uint32) (uint32, GPRegister, Immediate16, MovShift) {
 
 type movz uint32
 
-func MOVZ(dest GPRegister, imm Immediate16, shift MovShift) (movz, error) {
-	return movz(movBuildRaw(0b110100101, dest, imm, shift)), nil
+func MOVZ(dest GPRegister, imm Immediate16, shift MovShift) movz {
+	return movz(movBuildRaw(0b110100101, dest, imm, shift))
 }
 
 func (m movz) String() string {
@@ -61,8 +68,8 @@ func (m movz) String() string {
 
 type movk uint32
 
-func MOVK(dest GPRegister, imm Immediate16, shift MovShift) (movk, error) {
-	return movk(movBuildRaw(0b111100101, dest, imm, shift)), nil
+func MOVK(dest GPRegister, imm Immediate16, shift MovShift) movk {
+	return movk(movBuildRaw(0b111100101, dest, imm, shift))
 }
 
 func (m movk) String() string {
@@ -74,8 +81,8 @@ func (m movk) String() string {
 
 type movn uint32
 
-func MOVN(dest GPRegister, imm Immediate16, shift MovShift) (movn, error) {
-	return movn(movBuildRaw(0b100100101, dest, imm, shift)), nil
+func MOVN(dest GPRegister, imm Immediate16, shift MovShift) movn {
+	return movn(movBuildRaw(0b100100101, dest, imm, shift))
 }
 
 func (m movn) String() string {
