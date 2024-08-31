@@ -40,7 +40,7 @@ const (
 
 func (r GPRegister) Validate() error {
 	if r > X30 {
-		return fmt.Errorf("invalid general purpose register %d", r)
+		return fmt.Errorf("invalid general purpose register: %d", r)
 	}
 	return nil
 }
