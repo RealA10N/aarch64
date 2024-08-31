@@ -69,6 +69,10 @@ func (m movz) String() string {
 	return movString("MOVZ", Xd, imm, shift)
 }
 
+func (m movz) Binary() uint32 {
+	return uint32(m)
+}
+
 // MARK: MOVK
 
 type movk uint32
@@ -82,6 +86,10 @@ func (m movk) String() string {
 	return movString("MOVK", Xd, imm, shift)
 }
 
+func (m movk) Binary() uint32 {
+	return uint32(m)
+}
+
 // MARK: MOVN
 
 type movn uint32
@@ -93,4 +101,8 @@ func MOVN(Xd registers.GPRegister, imm immediates.Immediate16, shift MovShift) m
 func (m movn) String() string {
 	_, Xd, imm, shift := movExtractDetails(uint32(m))
 	return movString("MOVN", Xd, imm, shift)
+}
+
+func (m movn) Binary() uint32 {
+	return uint32(m)
 }
