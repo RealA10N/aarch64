@@ -1,4 +1,4 @@
-package aarch64codegen_test
+package instructions_test
 
 import (
 	"encoding/binary"
