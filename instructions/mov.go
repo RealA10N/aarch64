@@ -36,12 +36,12 @@ func (m MovShift) String() string {
 	return fmt.Sprintf("LSL #%d", m*16)
 }
 
-func movBuildRaw(magic uint32, dest registers.GPRegister, imm immediates.Immediate16, shift MovShift) uint32 {
-	return (magic << 23) | (shift.Binary() << 21) | (imm.Binary() << 5) | (dest.Binary())
+func movBuildRaw(magic uint32, Xd registers.GPRegister, imm immediates.Immediate16, shift MovShift) uint32 {
+	return (magic << 23) | (shift.Binary() << 21) | (imm.Binary() << 5) | (Xd.Binary())
 }
 
-func movString(name string, dest registers.GPRegister, imm immediates.Immediate16, shift MovShift) string {
-	s := fmt.Sprintf("%s %s, %s", name, dest, imm)
+func movString(name string, Xd registers.GPRegister, imm immediates.Immediate16, shift MovShift) string {
+	s := fmt.Sprintf("%s %s, %s", name, Xd, imm)
 	if shift != 0 {
 		s += fmt.Sprintf(", %s", shift)
 	}
@@ -52,45 +52,45 @@ func movExtractDetails(m uint32) (uint32, registers.GPRegister, immediates.Immed
 	magic := m >> 23
 	shift := MovShift((m >> 21) & 0b11)
 	imm := immediates.Immediate16((m >> 5) & 0xFFFF)
-	dest := registers.GPRegister(m & 0b11111)
-	return magic, dest, imm, shift
+	Xd := registers.GPRegister(m & 0b11111)
+	return magic, Xd, imm, shift
 }
 
 // MARK: MOVZ
 
 type movz uint32
 
-func MOVZ(dest registers.GPRegister, imm immediates.Immediate16, shift MovShift) movz {
-	return movz(movBuildRaw(0b110100101, dest, imm, shift))
+func MOVZ(Xd registers.GPRegister, imm immediates.Immediate16, shift MovShift) movz {
+	return movz(movBuildRaw(0b110100101, Xd, imm, shift))
 }
 
 func (m movz) String() string {
-	_, dest, imm, shift := movExtractDetails(uint32(m))
-	return movString("MOVZ", dest, imm, shift)
+	_, Xd, imm, shift := movExtractDetails(uint32(m))
+	return movString("MOVZ", Xd, imm, shift)
 }
 
 // MARK: MOVK
 
 type movk uint32
 
-func MOVK(dest registers.GPRegister, imm immediates.Immediate16, shift MovShift) movk {
-	return movk(movBuildRaw(0b111100101, dest, imm, shift))
+func MOVK(Xd registers.GPRegister, imm immediates.Immediate16, shift MovShift) movk {
+	return movk(movBuildRaw(0b111100101, Xd, imm, shift))
 }
 
 func (m movk) String() string {
-	_, dest, imm, shift := movExtractDetails(uint32(m))
-	return movString("MOVK", dest, imm, shift)
+	_, Xd, imm, shift := movExtractDetails(uint32(m))
+	return movString("MOVK", Xd, imm, shift)
 }
 
 // MARK: MOVN
 
 type movn uint32
 
-func MOVN(dest registers.GPRegister, imm immediates.Immediate16, shift MovShift) movn {
-	return movn(movBuildRaw(0b100100101, dest, imm, shift))
+func MOVN(Xd registers.GPRegister, imm immediates.Immediate16, shift MovShift) movn {
+	return movn(movBuildRaw(0b100100101, Xd, imm, shift))
 }
 
 func (m movn) String() string {
-	_, dest, imm, shift := movExtractDetails(uint32(m))
-	return movString("MOVN", dest, imm, shift)
+	_, Xd, imm, shift := movExtractDetails(uint32(m))
+	return movString("MOVN", Xd, imm, shift)
 }
