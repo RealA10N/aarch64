@@ -33,7 +33,7 @@ func TestMovk1(t *testing.T) {
 }
 
 func TestMovk2(t *testing.T) {
-	AssertExpectedInstruction(t, "MOVK X29, #0x65534, LSL #16", instructions.MOVK(
+	AssertExpectedInstruction(t, "MOVK X29, #65534, LSL #16", instructions.MOVK(
 		registers.X29,
 		immediates.Immediate16(0xFFFE),
 		instructions.MovShift16,
