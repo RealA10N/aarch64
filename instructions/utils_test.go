@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"testing"
 
+	"alon.kr/x/aarch64codegen/instructions"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -63,4 +64,14 @@ func assembleInstruction(t *testing.T, asm string) uint32 {
 	binFile := objectFileToRawBinary(t, tempDir, objFile)
 
 	return rawBinaryFileToUint32(t, binFile)
+}
+
+func AssertExpectedInstruction(
+	t *testing.T,
+	expected string,
+	actual instructions.Instruction,
+) {
+	expectedBinary := assembleInstruction(t, expected)
+	assert.Equal(t, expectedBinary, actual.Binary())
+	assert.Equal(t, expected, actual.String())
 }
