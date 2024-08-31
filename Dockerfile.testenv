@@ -7,11 +7,5 @@ FROM golang:1.23
 
 WORKDIR /aarch64codegen
 
-COPY . .
-
 RUN apt update -y --no-install-recommends
 RUN apt install -y gcc-aarch64-linux-gnu
-
-RUN go mod download
-
-CMD ["go", "test", "-v", "./...", "-coverprofile=coverage.out"]
