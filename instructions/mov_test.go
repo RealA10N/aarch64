@@ -25,7 +25,7 @@ func TestMovz2(t *testing.T) {
 }
 
 func TestMovk1(t *testing.T) {
-	AssertExpectedInstruction(t, "MOVK X10, #0, LSL #0x30", instructions.MOVK(
+	AssertExpectedInstruction(t, "MOVK X10, #0, LSL #48", instructions.MOVK(
 		registers.X10,
 		immediates.Immediate16(0),
 		instructions.MovShift48,
@@ -49,7 +49,7 @@ func TestMovn1(t *testing.T) {
 }
 
 func TestMovn2(t *testing.T) {
-	AssertExpectedInstruction(t, "MOVN X21, #0, LSL #0", instructions.MOVN(
+	AssertExpectedInstruction(t, "MOVN X21, #0", instructions.MOVN(
 		registers.X21,
 		immediates.Immediate16(0),
 		instructions.MovShift0,
