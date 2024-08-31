@@ -14,4 +14,4 @@ RUN apt install -y gcc-aarch64-linux-gnu
 
 RUN go mod download
 
-CMD ["go", "test", "-v", "./..."]
+CMD ["go", "test", "-v", "./...", "-coverprofile=coverage.out"]
