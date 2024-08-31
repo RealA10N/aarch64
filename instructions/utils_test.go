@@ -26,7 +26,9 @@ func assembleSourceFile(t *testing.T, tempDir string, srcFile *os.File) (objFile
 	defer objFile.Close()
 
 	command := exec.Command("aarch64-linux-gnu-as", "-o", objFile.Name(), srcFile.Name())
-	assert.NoError(t, command.Run())
+	if err := command.Run(); err != nil {
+		t.Fatalf("Failed to assemble: %s", err)
+	}
 
 	return objFile
 }
@@ -37,7 +39,9 @@ func objectFileToRawBinary(t *testing.T, tempDir string, objFile *os.File) (binF
 	defer binFile.Close()
 
 	command := exec.Command("aarch64-linux-gnu-objcopy", "-O", "binary", objFile.Name(), binFile.Name())
-	assert.NoError(t, command.Run())
+	if err := command.Run(); err != nil {
+		t.Fatalf("Failed to extract raw binary: %s", err)
+	}
 
 	return binFile
 }
