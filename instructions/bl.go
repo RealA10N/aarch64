@@ -4,17 +4,17 @@ import (
 	"alon.kr/x/aarch64codegen/immediates"
 )
 
-type bl uint32
+type Bl uint32
 
-func BL(offset immediates.Offset26Align4) bl {
-	return bl(0b100101<<26 | offset.Binary())
+func BL(offset immediates.Offset26Align4) Bl {
+	return Bl(0b100101<<26 | offset.Binary())
 }
 
-func (i bl) String() string {
+func (i Bl) String() string {
 	offset := immediates.Offset26Align4(i & 0x3FFFFFF)
 	return "BL " + offset.String()
 }
 
-func (i bl) Binary() uint32 {
+func (i Bl) Binary() uint32 {
 	return uint32(i)
 }
